@@ -53,6 +53,7 @@
  *
  * NOTE: If you change these, also change the error_reporting() code below
  */
+	// 设置运行环境
 	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 
 /*
@@ -195,7 +196,7 @@ switch (ENVIRONMENT)
 	{
 		chdir(dirname(__FILE__));
 	}
-
+	// 设置成绝对路径
 	if (($_temp = realpath($system_path)) !== FALSE)
 	{
 		$system_path = $_temp.DIRECTORY_SEPARATOR;
@@ -224,18 +225,23 @@ switch (ENVIRONMENT)
  * -------------------------------------------------------------------
  */
 	// The name of THIS file
+	// 入口文件名 index.php
 	define('SELF', pathinfo(__FILE__, PATHINFO_BASENAME));
 
 	// Path to the system directory
+	// system 目录 路径
 	define('BASEPATH', $system_path);
 
 	// Path to the front controller (this file) directory
+	// 根目录
 	define('FCPATH', dirname(__FILE__).DIRECTORY_SEPARATOR);
 
 	// Name of the "system" directory
+	// 文件目录名 system 
 	define('SYSDIR', basename(BASEPATH));
 
 	// The path to the "application" directory
+	// application 目录绝对路径
 	if (is_dir($application_folder))
 	{
 		if (($_temp = realpath($application_folder)) !== FALSE)
@@ -265,10 +271,11 @@ switch (ENVIRONMENT)
 		echo 'Your application folder path does not appear to be set correctly. Please open the following file and correct this: '.SELF;
 		exit(3); // EXIT_CONFIG
 	}
-
+	// application 目录绝对路径\
 	define('APPPATH', $application_folder.DIRECTORY_SEPARATOR);
 
 	// The path to the "views" directory
+	// 设置视图目录
 	if ( ! isset($view_folder[0]) && is_dir(APPPATH.'views'.DIRECTORY_SEPARATOR))
 	{
 		$view_folder = APPPATH.'views';
@@ -302,7 +309,7 @@ switch (ENVIRONMENT)
 		echo 'Your view folder path does not appear to be set correctly. Please open the following file and correct this: '.SELF;
 		exit(3); // EXIT_CONFIG
 	}
-
+	// 视图目录
 	define('VIEWPATH', $view_folder.DIRECTORY_SEPARATOR);
 
 /*

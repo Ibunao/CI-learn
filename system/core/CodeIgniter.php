@@ -55,6 +55,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @var	string
  *
  */
+	// 版本
 	const CI_VERSION = '3.1.9';
 
 /*
@@ -62,6 +63,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *  Load the framework constants
  * ------------------------------------------------------
  */
+	/**
+	 * 加载对应环境下的常量配置文件
+	 */
 	if (file_exists(APPPATH.'config/'.ENVIRONMENT.'/constants.php'))
 	{
 		require_once(APPPATH.'config/'.ENVIRONMENT.'/constants.php');
@@ -77,6 +81,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *  Load the global functions
  * ------------------------------------------------------
  */
+	// 定义全局方法
 	require_once(BASEPATH.'core/Common.php');
 
 
@@ -135,6 +140,7 @@ if ( ! is_php('5.4'))
  *  Define a custom error handler so we can log PHP errors
  * ------------------------------------------------------
  */
+	// 注册错误、异常 的处理方法
 	set_error_handler('_error_handler');
 	set_exception_handler('_exception_handler');
 	register_shutdown_function('_shutdown_handler');
@@ -155,6 +161,7 @@ if ( ! is_php('5.4'))
  * Note: Since the config file data is cached it doesn't
  * hurt to load it here.
  */
+	// 如果设置了 subclass_prefix 则替换默认的配置
 	if ( ! empty($assign_to_config['subclass_prefix']))
 	{
 		get_config(array('subclass_prefix' => $assign_to_config['subclass_prefix']));
@@ -165,6 +172,7 @@ if ( ! is_php('5.4'))
  *  Should we use a Composer autoloader?
  * ------------------------------------------------------
  */
+	// 注册composer的自动加载
 	if ($composer_autoload = config_item('composer_autoload'))
 	{
 		if ($composer_autoload === TRUE)
@@ -188,7 +196,9 @@ if ( ! is_php('5.4'))
  *  Start the timer... tick tock tick tock...
  * ------------------------------------------------------
  */
+	// 加载类
 	$BM =& load_class('Benchmark', 'core');
+	// 记录时间
 	$BM->mark('total_execution_time_start');
 	$BM->mark('loading_time:_base_classes_start');
 
@@ -204,6 +214,7 @@ if ( ! is_php('5.4'))
  *  Is there a "pre_system" hook?
  * ------------------------------------------------------
  */
+	// 执行注册的钩子
 	$EXT->call_hook('pre_system');
 
 /*
@@ -243,7 +254,7 @@ if ( ! is_php('5.4'))
  */
 	$charset = strtoupper(config_item('charset'));
 	ini_set('default_charset', $charset);
-
+	// 是否存在mbstring扩展
 	if (extension_loaded('mbstring'))
 	{
 		define('MB_ENABLED', TRUE);

@@ -88,6 +88,7 @@ class CI_Hooks {
 	public function __construct()
 	{
 		$CFG =& load_class('Config', 'core');
+		// 记录日志
 		log_message('info', 'Hooks Class Initialized');
 
 		// If hooks are not enabled in the config file
@@ -121,6 +122,7 @@ class CI_Hooks {
 	// --------------------------------------------------------------------
 
 	/**
+	 * 执行注册的钩子
 	 * Call Hook
 	 *
 	 * Calls a particular hook. Called by CodeIgniter.php.
